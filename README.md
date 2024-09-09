@@ -4,7 +4,7 @@ Abderrazak Chahi · Mohamed Kas · Ibrahim Kajo · Yassine Ruichek
 
 This repository is the official PyTorch implementation of R2GAN. The code is based on pytorch-CycleGAN-and-pix2pix repository in [<a href="https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix">here</a>].
 
-The paper is submitted to Pattern Analysis and Applications Journal
+The paper is submitted to Applied Intelligence Journal
 
 
 ## Abstract 

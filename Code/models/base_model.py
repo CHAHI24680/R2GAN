@@ -1,7 +1,6 @@
 import os
 import torch
 import torchvision
-from torch.utils.tensorboard import SummaryWriter
 
 from subprocess import Popen, PIPE
 
@@ -51,11 +50,7 @@ class BaseModel(ABC):
         self.image_paths = []
         self.metric = 0  # used for learning rate policy 'plateau'
         self.iterations = 0
-        if self.isTrain:
-            self.writer = SummaryWriter('runs/'+ opt.name)
-            # cmd = 'conda activate pix2pix && tensorboard --logdir ./runs/'+ opt.name
-            # print("Runing tensorboard in the background with : " + cmd)
-            # Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
+
 
     def writer_add_image(self, name, tensor_img, detach=False):
      
@@ -69,14 +64,6 @@ class BaseModel(ABC):
         self.writer.add_image(name, img, self.iterations, dataformats='HWC')
     
 
-    def writer_add_features(self, name, tensor_feat):
-        feat_img = tensor_feat[0].detach().cpu().numpy()
-        # img_grid = self.make_grid(feat_img)
-        feat_img = np.sum(feat_img,axis=0)
-        feat_img = feat_img -np.min(feat_img)
-        img_grid = 255*feat_img/np.max(feat_img)
-        img_grid = cv2.applyColorMap(np.array(img_grid, dtype=np.uint8), cv2.COLORMAP_JET)
-        self.writer.add_image(name, img_grid, self.iterations, dataformats='HWC')
 
     @staticmethod
     def modify_commandline_options(parser, is_train):
@@ -179,25 +166,6 @@ class BaseModel(ABC):
         """Calculate additional output images for visdom and HTML visualization"""
         pass
 
-    @abstractmethod
-    def writer_update_images(self):
-        """Updates images on tensorboard."""
-        pass
-
-    @abstractmethod
-    def writer_update_scalars(self):
-        """Updates losses on tensorboard."""
-        pass
-
-    @abstractmethod
-    def writer_add_histograms(self):
-        """Updates histograms on tensorboard."""
-        pass
-    
-    @abstractmethod
-    def writer_update_features(self):
-        """Updates features on tensorboard."""
-        pass
 
     def get_image_paths(self):
         """ Return image paths that are used to load current data"""

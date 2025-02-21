@@ -1190,7 +1190,7 @@ class R2GAN_generator(nn.Module):
         enc_A=self.model_encoder(imgA)
         enc_C=self.model_encoder(imgC)
 
-
+        #y = torch.max(enc_A,enc_C)
         y = (enc_A+enc_C)/2
         out=self.model_decoder(y)
         out1 = self.model1(enc_A)

@@ -32,7 +32,7 @@ class Pix2PixModel(BaseModel):
         parser.set_defaults(norm='batch', netG='unet_256', dataset_mode='aligned')
         if is_train:
             parser.set_defaults(pool_size=0, gan_mode='vanilla')
-            parser.add_argument('--lambda_L1', type=float, default=100.0, help='weight for L1 loss')
+            parser.add_argument('--lambda_L1', type=float, default=100.0, help='weight for L1 loss, as experimented in [], 100.0 is selected because it empirically provides a good balance between the GAN-based adversarial loss and the L1')
 
         return parser
 

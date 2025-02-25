@@ -41,13 +41,13 @@ Install the required packages (PyTorch, Torchvision, PyTorch Cuda toolkit, OpenC
     ```
 ### Proposed PMF training dataset
 To comprehensively train the R2GAN model, we propose generating an extensive and realistic Paired Multi-Focus (PMF) image dataset. This is achieved by introducing a sophisticated semantic segmentation-guided strategy to create high-resolution pairs featuring partially focused images. The RGB visible images and their corresponding semantic ground truth maps are collected from Cityscapes, Mapillary Vistas, COCO, and ADE20K.
-[<a href="https://utbm-my.sharepoint.com/:u:/g/personal/abderrazak_chahi_utbm_fr/EYe6A8HBY2VBqlYjImeRDOgBdosofEpbNzdLXIXDZakM5g?e=nNbe3A">PMF download link</a>][<a href="https://github.com/CHAHI24680/R2GAN/blob/main/Code/Generate_PMF_train_dataset.py">PMF generation code link</a>].
+[<a href="https://utbm-my.sharepoint.com/:u:/g/personal/abderrazak_chahi_utbm_fr/EYe6A8HBY2VBqlYjImeRDOgBdosofEpbNzdLXIXDZakM5g?e=8ZeiI4">PMF download link</a>][<a href="https://github.com/CHAHI24680/R2GAN/blob/main/Code/Generate_PMF_train_dataset.py">PMF generation code link</a>].
 <img src="./Figures/PMF_samples.png">
 ### Unseen testing datasets
 To validate the performance of the R2GAN framework, we targeted the well-known image fusion applications of visible and infrared fusion, multimodality medical image fusion, and multi-focus image fusion. The R2GAN is trained on the PMF dataset and tested on the following unseen datasets: 
 * Visible and infrared fusion, [<a href="https://figshare.com/articles/dataset/TNO_Image_Fusion_Dataset/1008029">TNO dataset</a>].
 * Multi-modality medical image fusion, [<a href="https://www.med.harvard.edu/AANLIB/home.html">MD dataset</a>].
-* Multi-focus image fusion, [<a href="https://mansournejati.ece.iut.ac.ir/content/lytro-multi-focus-dataset">Lytro dataset</a>].
+* Multi-focus image fusion, [<a href="??">Lytro dataset</a>].
 
 ** Please download and extract the datasets into their respective folders within the `datasets` root directory. Your directory structure should look like this:
 

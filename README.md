@@ -1,9 +1,9 @@
-# R2GAN: Enhancing Unseen Image Fusion with Reconstruction-Guided Generative Adversarial Network
+# R2GAN: Enhancing unseen image fusion with reconstruction-guided generative adversarial Network
 
 **Abderrazak Chahi · Mohamed Kas · Ibrahim Kajo · Yassine Ruichek**
 
 [![Paper](https://img.shields.io/badge/Paper-Applied%20Intelligence-blue)](https://link.springer.com/article/10.1007/s10489-025-06610-2)
-[![DOI](https://img.shields.io/badge/DOI-10.1007%2Fs10489--025--06610--2-blue)](https://doi.org/10.1007/s10489-025-06610-2)
+[![DOI](https://img.shieldn.io/badge/DOI-10.1007%2Fs10489--025--06610--2-blue)](https://doi.org/10.1007/s10489-025-06610-2)
 [![PyTorch](https://img.shields.io/badge/Framework-PyTorch-ee4c2c)](https://pytorch.org/)
 
 This repository provides the official PyTorch implementation of **R2GAN**, published in *Applied Intelligence*, Volume 55, Article 821 (2025).

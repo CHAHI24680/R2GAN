@@ -1,4 +1,4 @@
-# R2GAN: Enhancing Unseen Image Fusion with Reconstruction-Guided Generative Adversarial Network
+# R2GAN: Enhancing unseen image fusion with reconstruction-guided generative adversarial network
 
 **Abderrazak Chahi · Mohamed Kas · Ibrahim Kajo · Yassine Ruichek**
 

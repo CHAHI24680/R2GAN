@@ -1,83 +1,208 @@
 # R2GAN: Enhancing Unseen Image Fusion with Reconstruction-Guided Generative Adversarial Network
 
-Abderrazak Chahi · Mohamed Kas · Ibrahim Kajo · Yassine Ruichek
+**Abderrazak Chahi · Mohamed Kas · Ibrahim Kajo · Yassine Ruichek**
 
-This repository is the official PyTorch implementation of R2GAN. The code is based on pytorch-CycleGAN-and-pix2pix repository in [<a href="https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix">here</a>].
+[![Paper](https://img.shields.io/badge/Paper-Applied%20Intelligence-blue)](https://link.springer.com/article/10.1007/s10489-025-06610-2)
+[![DOI](https://img.shields.io/badge/DOI-10.1007%2Fs10489--025--06610--2-blue)](https://doi.org/10.1007/s10489-025-06610-2)
+[![PyTorch](https://img.shields.io/badge/Framework-PyTorch-ee4c2c)](https://pytorch.org/)
 
-The paper is submitted to Applied Intelligence Journal
+This repository provides the official PyTorch implementation of **R2GAN**, published in *Applied Intelligence*, Volume 55, Article 821 (2025).
 
+> **Paper:** A. Chahi, M. Kas, I. Kajo, and Y. Ruichek, “R2GAN: Enhancing unseen image fusion with reconstruction-guided generative adversarial network,” *Applied Intelligence*, vol. 55, article 821, 2025.
+> **DOI:** [10.1007/s10489-025-06610-2](https://doi.org/10.1007/s10489-025-06610-2)
 
-## Abstract 
+The implementation is built upon the [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix) repository.
+
+## Abstract
+
 <p align="justify">
-Generative Adversarial Networks (GANs) have gained significant prominence in the field of computer vision, and their application extends to various image generation tasks, including image fusion. This paper introduces a novel generative adversarial network, termed the Reconstruction-Guided Generative Adversarial Network (R2GAN), designed to address the challenges of general image fusion. The R2GAN architecture consists of three-pathway generators. The main generator is specifically designed to improve image fusion capabilities, whereas auxiliary generators concentrate on enhancing the reconstruction of features related to the source images. To optimize the network, we introduce a novel loss function known as the reconstruction guided loss. It is designed to preserve the feature distribution of each source image, guiding the primary R2GAN generator to capture the consistency between the fused image and the source images more effectively. The R2GAN is a generic network, which applies to diverse, unseen fusion tasks with unseen data, obviating the need for any fine-tuning procedures or the use of multiple individually trained models. These tasks encompass visible and infrared fusion, medical image fusion, and multi-focus image fusion. To train the R2GAN model, we employed a sophisticated semantic segmentation-guided strategy to generate a comprehensive and realistic Paired Multi-Focus image dataset (PMF). This involved creating high-resolution pairs that showcase partially focused images. Experimental results for visible and infrared fusion, medical image fusion, and multi-focus image fusion demonstrate that the proposed R2GAN produces enhanced fusion outcomes, achieving superior performance compared to current state-of-the-art image fusion approaches.
+Generative Adversarial Networks (GANs) have become widely used in computer vision, including image-fusion applications. However, many existing fusion methods depend on task-specific training, labeled data, or separately trained models, which limits their generalization to unseen fusion scenarios. R2GAN addresses this limitation through a reconstruction-guided adversarial framework composed of a primary fusion generator and two auxiliary reconstruction generators. The auxiliary pathways preserve the feature distributions of the source images and guide the primary generator through a reconstruction-guided loss, improving consistency between the fused output and its inputs. A single R2GAN model can therefore be applied to visible–infrared, multimodal medical, and multi-focus image fusion without task-specific fine-tuning. To train the framework, we introduce a semantic-segmentation-guided strategy for generating a realistic Paired Multi-Focus (PMF) dataset containing high-resolution partially focused image pairs. Experiments across unseen fusion tasks show that R2GAN produces high-quality fused images and achieves competitive or superior performance compared with state-of-the-art image-fusion approaches.
 </p>
 
+## Main Features
 
-## R2GAN overall architecture
-<h3> Learning process of R2GAN </h3>
-<img src="./Figures/Overall_R2GAN_1.png">
-<h3> Testing process of R2GAN </h3>
-<img src="./Figures/Overall_R2GAN_2.png">
+* A generic image-fusion model trained once and evaluated on multiple unseen fusion tasks.
+* A three-generator architecture containing one primary fusion generator and two auxiliary reconstruction generators.
+* A reconstruction-guided loss that preserves source-image feature distributions.
+* A semantic-segmentation-guided strategy for generating the Paired Multi-Focus (PMF) training dataset.
+* Evaluation on visible–infrared, multimodal medical, and multi-focus image fusion.
 
-## Before train
-### Recommended environments
-- Linux or Win64
-- Python 3.7 or above
-- NVIDIA GPU + CUDA CuDNN >=11.3
-- PyToch 1.10 or above
-### Install R2GAN
-Install the required packages (PyTorch, Torchvision, PyTorch Cuda toolkit, OpenCV, Visdom,...). We recommand to use the following Conda environnement depending on the OS:
-  - Linux :
-    ```bash
-    conda env create -f environment_linux.yml
-    ```
-  - Win 64:
-    ```bash
-    conda env create -f environment_win64.yml
-    ```
-  - For pip users, please refer to requirements.txt file to install the packages using pip command :
-    ```bash
-      pip install -r requirements.txt
-    ```
-### Proposed PMF training dataset
-To comprehensively train the R2GAN model, we propose generating an extensive and realistic Paired Multi-Focus (PMF) image dataset. This is achieved by introducing a sophisticated semantic segmentation-guided strategy to create high-resolution pairs featuring partially focused images. The RGB visible images and their corresponding semantic ground truth maps are collected from Cityscapes, Mapillary Vistas, COCO, and ADE20K.
-[<a href="https://utbm-my.sharepoint.com/:u:/g/personal/abderrazak_chahi_utbm_fr/EYe6A8HBY2VBqlYjImeRDOgBdosofEpbNzdLXIXDZakM5g?e=8ZeiI4">PMF download link</a>][<a href="https://github.com/CHAHI24680/R2GAN/blob/main/Code/Generate_PMF_train_dataset.py">PMF generation code link</a>].
-<img src="./Figures/PMF_samples.png">
-### Unseen testing datasets
-To validate the performance of the R2GAN framework, we targeted the well-known image fusion applications of visible and infrared fusion, multimodality medical image fusion, and multi-focus image fusion. The R2GAN is trained on the PMF dataset and tested on the following unseen datasets: 
-* Visible and infrared fusion, [<a href="https://figshare.com/articles/dataset/TNO_Image_Fusion_Dataset/1008029">TNO dataset</a>].
-* Multi-modality medical image fusion, [<a href="https://www.med.harvard.edu/AANLIB/home.html">MD dataset</a>].
-* Multi-focus image fusion, [<a href="??">Lytro dataset</a>].
+## R2GAN Architecture
 
-** Please download and extract the datasets into their respective folders within the `datasets` root directory. Your directory structure should look like this:
+### Training Process
 
-```
-$R2GAN/Code/datasets
-├── TNO
-│   └── test
-├── Lytro
-│   └── test
-├── MD
-│   └── test
-├── PMF
-│   ├── train
-```
-## To train
-Before running the training script, to view the training results and loss plots, run the Visdom visualizer in a separate shell using `python -m visdom.server`, then click the URL http://localhost:8097.
+<p align="center">
+  <img src="./Figures/Overall_R2GAN_1.png" alt="R2GAN training architecture">
+</p>
 
-To train the R2GAN model on the PMF dataset, run the following command using two GPUs (as an example):
-  ```bash
-    python train.py --dataroot datasets/PMF --model pix2pix --gpu_ids 0,1 --netG R2GAN_generator --netD pixel --batch_size 8 --verbose --name PMF_R2GAN
-  ```
-The trained R2GAN model will be saved to `./checkpoints/PMF_R2GAN`. To view more intermediate training results, please check out `./checkpoints/PMF_R2GAN/web/index.html`. 
+### Inference Process
 
-Note that the `base_options.py` and `train_options.py` files contain the optimal training parameters, which can also be set as arguments in the training `python train.py` command.
+<p align="center">
+  <img src="./Figures/Overall_R2GAN_2.png" alt="R2GAN inference architecture">
+</p>
 
-## To test
-To evaluate the R2GAN model on a specific unseen fusion task, run the following command using the training options you selected:
+## Environment
+
+### Recommended Configuration
+
+* Linux or Windows 64-bit
+* Python 3.7 or later
+* NVIDIA GPU
+* CUDA 11.3 or later with a compatible cuDNN version
+* PyTorch 1.10 or later
+
+## Installation
+
+Clone the repository and enter the code directory:
+
 ```bash
-    python test.py --dataroot datasets/Lytro --model pix2pix  --gpu_ids 0,1 --netG R2GAN_generator --batch_size 8 --verbose --name PMF_R2GAN --eval
-  ```
-To find the used parameters please check the config file located in `checkpoints/PMF_R2GAN/train_opt.txt`. 
+git clone https://github.com/CHAHI24680/R2GAN.git
+cd R2GAN/Code
+```
 
-The test fusion results will be saved to an HTML file here: `./results/PMF_R2GAN/test_latest/index.html`. You can find more scripts in the `scripts` directory.
+Install the required packages using one of the following methods.
+
+### Conda on Linux
+
+```bash
+conda env create -f environment_linux.yml
+```
+
+### Conda on Windows 64-bit
+
+```bash
+conda env create -f environment_win64.yml
+```
+
+### Pip
+
+```bash
+pip install -r requirements.txt
+```
+
+## Datasets
+
+### Paired Multi-Focus Training Dataset
+
+We introduce the **Paired Multi-Focus (PMF)** dataset to train R2GAN. PMF is generated using a semantic-segmentation-guided strategy that creates high-resolution pairs of partially focused images. The RGB images and their corresponding semantic annotations are collected from Cityscapes, Mapillary Vistas, COCO, and ADE20K.
+
+* [Download the PMF dataset](https://utbm-my.sharepoint.com/:u:/g/personal/abderrazak_chahi_utbm_fr/EYe6A8HBY2VBqlYjImeRDOgBdosofEpbNzdLXIXDZakM5g?e=8ZeiI4)
+* [PMF generation script](https://github.com/CHAHI24680/R2GAN/blob/main/Code/Generate_PMF_train_dataset.py)
+
+<p align="center">
+  <img src="./Figures/PMF_samples.png" alt="Samples from the PMF dataset">
+</p>
+
+### Unseen Testing Datasets
+
+R2GAN is trained on PMF and evaluated without task-specific fine-tuning on the following datasets:
+
+* **Visible–infrared image fusion:** [TNO Image Fusion Dataset](https://figshare.com/articles/dataset/TNO_Image_Fusion_Dataset/1008029)
+* **Multimodal medical image fusion:** [Harvard Whole Brain Atlas](https://www.med.harvard.edu/AANLIB/home.html)
+* **Multi-focus image fusion:** [Lytro Multi-Focus Image Dataset](https://github.com/mnnejati/LytroDataset)
+
+Download and extract the datasets into their corresponding folders under `Code/datasets`:
+
+```text
+R2GAN/
+└── Code/
+    └── datasets/
+        ├── TNO/
+        │   └── test/
+        ├── Lytro/
+        │   └── test/
+        ├── MD/
+        │   └── test/
+        └── PMF/
+            └── train/
+```
+
+## Training
+
+Before starting training, launch the Visdom server in a separate terminal:
+
+```bash
+python -m visdom.server
+```
+
+Then open http://localhost:8097 in your browser.
+
+To train R2GAN on the PMF dataset using two GPUs, run:
+
+```bash
+python train.py \
+  --dataroot datasets/PMF \
+  --model pix2pix \
+  --gpu_ids 0,1 \
+  --netG R2GAN_generator \
+  --netD pixel \
+  --batch_size 8 \
+  --verbose \
+  --name PMF_R2GAN
+```
+
+The trained model is saved in:
+
+```text
+./checkpoints/PMF_R2GAN
+```
+
+Intermediate training results are available at:
+
+```text
+./checkpoints/PMF_R2GAN/web/index.html
+```
+
+The default and recommended training parameters are defined in `base_options.py` and `train_options.py`. They may also be overridden through command-line arguments.
+
+## Testing
+
+To evaluate the trained R2GAN model on an unseen fusion task, specify the corresponding dataset directory. For example, to test on Lytro:
+
+```bash
+python test.py \
+  --dataroot datasets/Lytro \
+  --model pix2pix \
+  --gpu_ids 0,1 \
+  --netG R2GAN_generator \
+  --batch_size 8 \
+  --verbose \
+  --name PMF_R2GAN \
+  --eval
+```
+
+The configuration used during training is stored in:
+
+```text
+./checkpoints/PMF_R2GAN/train_opt.txt
+```
+
+The generated fusion results are saved in:
+
+```text
+./results/PMF_R2GAN/test_latest/index.html
+```
+
+Additional training and testing examples are available in the `scripts` directory.
+
+## Citation
+
+Please cite the following paper when using this repository, the R2GAN framework, or the PMF dataset:
+
+```bibtex
+@article{chahi2025r2gan,
+  author  = {Chahi, Abderrazak and Kas, Mohamed and Kajo, Ibrahim and Ruichek, Yassine},
+  title   = {R2GAN: Enhancing Unseen Image Fusion with Reconstruction-Guided Generative Adversarial Network},
+  journal = {Applied Intelligence},
+  volume  = {55},
+  number  = {11},
+  pages   = {821},
+  year    = {2025},
+  doi     = {10.1007/s10489-025-06610-2},
+  url     = {https://doi.org/10.1007/s10489-025-06610-2}
+}
+```
+
+## Acknowledgment
+
+This implementation is based on the excellent [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix) framework.
